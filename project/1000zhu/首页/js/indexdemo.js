@@ -4,9 +4,6 @@ var loopPlayback = false,
     stopSwitch = true;
 var videoSwiper, casesSwiper, appStoreSwiper, aboutSwiper;
 $(function() {
-    // var m = document.location.href.toLowerCase().match(/#p(\d+)$/);
-    // if (m != null) pageIndex = m[1] - 1;
-    //if (!authentication()) return;
     preload()
 });
 
@@ -155,6 +152,7 @@ function pageLoad() {
         loop: true,
         slidesPerView: 3,
         grabCursor: true,
+        autoplay:3000,
         //Enable 3D Flow
         tdFlow: {
             rotate: 0,
@@ -162,6 +160,10 @@ function pageLoad() {
             depth: 200,
             modifier: 1,
             shadows: false
+        },
+        onSlideChangeEnd: function(swiper){
+            $(".cases .swiper-slide").removeClass("on");
+            $(".cases .swiper-slide-active").next(".swiper-slide-visible").addClass("on");
         },
         onTouchEnd: function() {
             casesSwiper2.startAutoplay()
