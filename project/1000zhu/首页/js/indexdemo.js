@@ -92,9 +92,10 @@ function pageLoad() {
     });
     for (var i = 0; i < $(".video .swiper-slide").size(); i++) $(".video .guide").append('<a></a>');
     $(".video .guide a").eq(0).addClass("active");
+    $(".video .nth1, .video .nth2").append('<div class="shade"></div><div class="line"><u></u></div>');
     videoSwiper = new Swiper(".video .swiper-container", {
         loop: true,
-        autoplay: 5000,
+        //autoplay: 5000,
         grabCursor: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -268,16 +269,17 @@ function initLayout() {
     if (hhNormal == 42) hhFixed = 60;
     else if (hhNormal == 0) hhFixed = 0;
     var refTop = hhNormal;
+    
     $(".video .swiper-slide").each(function(i, item) {
-        if ($(item).hasClass("nth5")) {
+        if ($(item).hasClass("nth1")) {
             var box = $(".video .box");
             var boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
-            if ($(window).height() < 800) {
-                $(item).find(".box").css("top", boxTop - box.height() / 2);
-            } else {
-                $(item).find(".box").css("top", boxTop - box.height());
-            }
-
+            $(item).find(".box").css("top", (boxTop - box.height())/2);
+        }else if ($(item).hasClass("nth2")) {
+            var boxMt = parseInt(($(".video .guide").offset().top - $(item).find(".left").height()) / 2);
+            var boxWidth = $(item).find(".left").width() + $(item).find(".right").width();
+            $(item).find(".box").css("margin-top", boxMt).css("width", boxWidth);
+            $(item).find(".shade").css("top", boxMt - 711)
         }
     });
     var items = $(".business ul.items li");
@@ -344,7 +346,7 @@ function initLayout() {
 
 function videoSwiperAnimation() {
     var e = $(".video .swiper-container .nth" + (videoSwiper.activeLoopIndex + 1).toString()).addClass("active");
-    if (videoSwiper.activeLoopIndex == 1) {
+    if (videoSwiper.activeLoopIndex == 2) {
         if (e.find(".box").width() == $(window).width()) e.find(".box").css("left", 0);
         else {
             var offsetLeft = $(window).width() / 2 - e.find(".box").width() - 30;
@@ -356,6 +358,13 @@ function videoSwiperAnimation() {
 
 
 function sectionAnimation() {
+    if (pageIndex == 0) {
+        videoSwiper.startAutoplay();
+        videoSwiperAnimation();
+        return
+    } else {
+        videoSwiper.stopAutoplay()
+    }
 
     var e = $("body>section").eq(pageIndex).addClass("active");
     if (pageIndex == 2) {

@@ -314,7 +314,7 @@ function initLayout() {
             var boxMt = parseInt((refTop - $(item).find(".left").height()) / 2);
             var boxWidth = $(item).find(".left").width() + $(item).find(".right").width();
             $(item).find(".box").css("margin-top", boxMt).css("width", boxWidth);
-            $(item).find(".shade").css("top", boxMt - 711)
+            $(item).find(".shade").css("top", boxMt)
         } /*else if ($(item).hasClass("nth2")) {
             var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
             $(item).find(".box").css("top", boxMt)
