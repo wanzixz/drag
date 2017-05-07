@@ -268,18 +268,21 @@ function initLayout() {
     var hhFixed = 70;
     if (hhNormal == 42) hhFixed = 60;
     else if (hhNormal == 0) hhFixed = 0;
-    var refTop = hhNormal;
-    
+    var refTop = 0;
+    if (refTop == 0) refTop = $(".video .guide").offset().top;
     $(".video .swiper-slide").each(function(i, item) {
         if ($(item).hasClass("nth1")) {
-            var box = $(".video .box");
-            var boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
-            $(item).find(".box").css("top", (boxTop - box.height())/2);
+            console.log(refTop);
+            var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
+            $(item).find(".box").css("top", boxMt);
         }else if ($(item).hasClass("nth2")) {
             var boxMt = parseInt(($(".video .guide").offset().top - $(item).find(".left").height()) / 2);
             var boxWidth = $(item).find(".left").width() + $(item).find(".right").width();
             $(item).find(".box").css("margin-top", boxMt).css("width", boxWidth);
             $(item).find(".shade").css("top", boxMt - 711)
+        } else if ($(item).hasClass("nth3")) {
+            var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
+            $(item).find(".box").css("top", boxMt);
         }
     });
     var items = $(".business ul.items li");
