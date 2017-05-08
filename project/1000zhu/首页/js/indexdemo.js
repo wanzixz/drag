@@ -162,7 +162,7 @@ function pageLoad() {
             modifier: 1,
             shadows: false
         },
-        onSlideChangeEnd: function(swiper){
+        onSlideChangeStart: function(swiper){
             $(".cases .swiper-slide").removeClass("on");
             $(".cases .swiper-slide-active").next(".swiper-slide-visible").addClass("on");
         },
