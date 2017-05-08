@@ -339,7 +339,7 @@ function initLayout() {
         $(".aboutus .items").width(width)
     }
     box = $(".aboutus .box");
-    boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
+    boxTop = parseInt(($(window).height() - box.height()/2 - hhFixed) / 2);
     box.css("top", boxTop);
 
     box = $(".contact .box");
