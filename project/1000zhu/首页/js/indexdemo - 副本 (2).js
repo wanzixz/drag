@@ -15,7 +15,7 @@ function preload() {
     selector.each(function(i, item) {
         var imgUrl = $(item).css("background-image");
         var m = imgUrl.match(/url\("?([^"]+)"?\)/);
-        console.log(i)
+
         loadImage(m[1], imgLoaded)
     })
 }
@@ -23,6 +23,7 @@ function preload() {
 function loadImage(url, callback) {
     var img = new Image();
     img.src = url;
+    console.log(img);
     if (img.complete) {
         preloadCount--;
         callback.call(img);
@@ -96,7 +97,7 @@ function pageLoad() {
     $(".video .nth1, .video .nth2").append('<div class="shade"></div><div class="line"><u></u></div>');
     videoSwiper = new Swiper(".video .swiper-container", {
         loop: true,
-        autoplay: 5000,
+        //autoplay: 5000,
         grabCursor: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -273,6 +274,7 @@ function initLayout() {
     if (refTop == 0) refTop = $(".video .guide").offset().top;
     $(".video .swiper-slide").each(function(i, item) {
         if ($(item).hasClass("nth1")) {
+            console.log(refTop);
             var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
             $(item).find(".box").css("top", boxMt);
         }else if ($(item).hasClass("nth2")) {
