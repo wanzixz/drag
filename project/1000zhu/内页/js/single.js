@@ -107,6 +107,7 @@ function pageLoad() {
     domMouse('#js-cont-three li','active');
     domMouse('#js-cont-four li','bl');
     domMouse('#js-qywz-two li','active');
+    domMouse('#js-qwyx-one li','active');
 }
 
 function initLayout() {
